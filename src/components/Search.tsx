@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 const Search = () => {
   const [search, setSearch] = useState('')
   return (
-    <div className="flex items-center p-2 h-8 w-60 border-2 border-gray-200">
+    <div className="flex items-center p-2 h-8 w-60 border-2 border-gray-200 ">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-4 w-5 text-gray-400"
@@ -21,7 +21,7 @@ const Search = () => {
       <input
         type="text"
         placeholder="Search Media"
-        className="ml-2 text-xs h-7 w-48 focus:outline-none"
+        className="ml-2 text-xs h-7 w-48 focus:outline-none transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:border-2"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />

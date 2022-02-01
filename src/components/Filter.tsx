@@ -1,4 +1,5 @@
 import React from 'react'
+import Checkbox from './Checkbox'
 import ControlledRadioButtonsGroup from './FIlterButtons'
 import Search from './Search'
 
@@ -6,10 +7,11 @@ const Filter = () => {
   return (
     <div className="flex flex-col border-gray-200 border-2 h-28 my-3">
       <div className="flex basis-full border-gray-200 border-b-2 h-16">
-        <div className="flex basis-1/5 justify-center items-center border-gray-200 border-r-2">
+        <div className="flex flex-col md:flex-row basis-[8%] justify-center items-center border-gray-200 border-r-2">
+          <Checkbox />
           <p className="text-gray-500 font-medium text-sm">Select All</p>
         </div>
-        <div className="flex basis-4/5 items-center justify-between p-4">
+        <div className="flex basis-[92%] items-center justify-between p-4">
           <button disabled={true} className="text-gray-300">
             <svg
               xmlns="http://www.w3.org/2000/svg"
