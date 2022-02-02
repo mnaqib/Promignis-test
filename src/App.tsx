@@ -1,38 +1,38 @@
 import { useEffect, useState } from 'react'
 
 import './App.css'
-import { useAppDispatch } from './app/hooks'
+import { useAppDispatch, useAppSelector } from './app/hooks'
 import Filter from './components/Filter'
 import ImageList from './components/ImageList'
 import Navbar from './components/Navbar'
-import { addAll, Image } from './features/images/imageSlice'
+import { addAll, Image, selectImages } from './features/images/imageSlice'
 import { sortByTitle } from './utils/sortBy'
 
 function App() {
   const dispatch = useAppDispatch()
   const [isdeleteEnabled, setIsdeleteEnabled] = useState(false)
   const [listToDelete, setListToDelete] = useState<string[]>([])
-  const [deleteAll, setDeleteAll] = useState(false)
   const [checkAll, setCheckAll] = useState(false)
-  const [data, setData] = useState<Image[]>([])
+  const data = useAppSelector(selectImages)
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     ;(async function () {
       const response = await fetch(
         'https://api.unsplash.com/photos/?client_id=-7u_QQ4JL8yujr4-xaQDCq3l7VL812xDzGElyerQ4w8&per_page=20'
       ).then((res) => res.json())
-      let data: Image[] = response.map((result: any) => {
+      let data: Image[] = response.map((result: any, index: number) => {
         return {
           id: result.id,
-          description: result.description,
+          title: `img-${index}.jpg`,
           url: result.urls.small,
           date: result.created_at,
           size: result.height * result.width,
+          description: result.description,
         }
       })
       data = sortByTitle(data)
       dispatch(addAll(data))
-      setData(data)
     })()
   }, [])
 
@@ -40,10 +40,8 @@ function App() {
     listToDelete.length > 0
       ? setIsdeleteEnabled(true)
       : setIsdeleteEnabled(false)
-    if (data.length > 0) {
-      listToDelete.length === data.length
-        ? setCheckAll(true)
-        : setCheckAll(false)
+    if (data.length > 0 && listToDelete.length === data.length) {
+      setCheckAll(true)
     }
   }, [listToDelete])
 
@@ -61,17 +59,18 @@ function App() {
       <Filter
         isdeleteEnabled={isdeleteEnabled}
         listToDelete={listToDelete}
-        deleteAll={deleteAll}
-        setDeleteAll={setDeleteAll}
         setIsdeleteEnabled={setIsdeleteEnabled}
         setListToDelete={setListToDelete}
         setCheckAll={setCheckAll}
         checkAll={checkAll}
+        search={search}
+        setSearch={setSearch}
       />
       <ImageList
         setListToDelete={setListToDelete}
         listToDelete={listToDelete}
         checkAll={checkAll}
+        search={search}
       />
     </div>
   )

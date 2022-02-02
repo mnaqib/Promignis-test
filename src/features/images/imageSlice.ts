@@ -11,6 +11,7 @@ export interface Image {
   url: string
   size: number
   date: string
+  title: string
 }
 
 const initialState: ImageState = {

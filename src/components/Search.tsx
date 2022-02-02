@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-const Search = () => {
-  const [search, setSearch] = useState('')
+interface IProps {
+  search: string
+  setSearch: React.Dispatch<React.SetStateAction<string>>
+}
+
+const Search: React.FC<IProps> = ({ search, setSearch }) => {
   return (
     <div className="flex items-center p-2 h-8 w-60 border-2 border-gray-200 ">
       <svg
@@ -21,7 +25,7 @@ const Search = () => {
       <input
         type="text"
         placeholder="Search Media"
-        className="ml-2 text-xs h-7 w-48 focus:outline-none transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:border-2"
+        className="ml-2 text-xs h-7 w-48 focus:outline-none transition ease-in-out focus:text-gray-700 focus:bg-white"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />

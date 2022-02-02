@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useAppDispatch } from '../app/hooks'
-import { removeAll, removeImage } from '../features/images/imageSlice'
+import { removeImage } from '../features/images/imageSlice'
 import CheckboxAll from './checkbox/CheckboxAll'
 import ControlledRadioButtonsGroup from './FIlterButtons'
 import Search from './Search'
@@ -8,9 +8,9 @@ import Search from './Search'
 interface IProps {
   isdeleteEnabled: boolean
   listToDelete: string[]
-  deleteAll: boolean
   checkAll: boolean
-  setDeleteAll: React.Dispatch<React.SetStateAction<boolean>>
+  search: string
+  setSearch: React.Dispatch<React.SetStateAction<string>>
   setIsdeleteEnabled: React.Dispatch<React.SetStateAction<boolean>>
   setListToDelete: React.Dispatch<React.SetStateAction<string[]>>
   setCheckAll: React.Dispatch<React.SetStateAction<boolean>>
@@ -19,27 +19,24 @@ interface IProps {
 const Filter: React.FC<IProps> = ({
   isdeleteEnabled,
   listToDelete,
-  deleteAll,
-  setDeleteAll,
   setIsdeleteEnabled,
   setListToDelete,
   setCheckAll,
   checkAll,
+  search,
+  setSearch,
 }) => {
   const dispatch = useAppDispatch()
-  const [checked, setChecked] = useState(false)
 
   return (
     <div className="flex flex-col border-gray-200 border-2 h-28 mt-1 mb-8">
       <div className="flex basis-full border-gray-200 border-b-2 h-16">
         <div className="flex flex-col md:flex-row basis-[8%] justify-center items-center border-gray-200 border-r-2">
           <CheckboxAll
-            setDeleteAll={setDeleteAll}
             setIsdeleteEnabled={setIsdeleteEnabled}
-            setChecked={setChecked}
-            checked={checked}
             setCheckAll={setCheckAll}
             checkAll={checkAll}
+            listToDelete={listToDelete}
           />
           <p className="text-gray-500 font-medium text-sm">Select All</p>
         </div>
@@ -52,12 +49,10 @@ const Filter: React.FC<IProps> = ({
                 : 'text-gray-300 cursor-default'
             }
             onClick={() => {
-              deleteAll
-                ? dispatch(removeAll())
-                : dispatch(removeImage(listToDelete))
+              dispatch(removeImage(listToDelete))
 
               setIsdeleteEnabled(false)
-              setChecked(false)
+              setCheckAll(false)
               setListToDelete([])
             }}
           >
@@ -77,7 +72,7 @@ const Filter: React.FC<IProps> = ({
             </svg>
           </button>
           <div>
-            <Search />
+            <Search search={search} setSearch={setSearch} />
           </div>
         </div>
       </div>

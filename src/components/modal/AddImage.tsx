@@ -1,12 +1,33 @@
 import React from 'react'
+import bytes from 'bytes'
 
-const AddImage = () => {
+interface IProps {
+  url: string
+  size: number
+  height: number
+  width: number
+  description: string
+  setTitle: React.Dispatch<React.SetStateAction<string>>
+  title: string
+  error: boolean
+}
+
+const AddImage: React.FC<IProps> = ({
+  url,
+  size,
+  height,
+  width,
+  description,
+  title,
+  setTitle,
+  error,
+}) => {
   return (
-    <div className="flex flex-col basis-full m-2 p-2">
+    <div className="flex flex-col basis-full m-2 p-2 max-h-96">
       <div>
         <img
-          className="object-cover basis-36 mx-1 my-1 h-96 rounded"
-          src="https://images.unsplash.com/photo-1638913662415-8c5f79b20656?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyOTY3MTl8MXwxfGFsbHwxfHx8fHx8Mnx8MTY0Mzc0ODkxMg&ixlib=rb-1.2.1&q=80&w=1080"
+          className="object-cover basis-36 mx-1 my-1 max-h-96 rounded"
+          src={url}
           alt=""
         />
       </div>
@@ -37,9 +58,15 @@ const AddImage = () => {
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
       "
-            id="exampleFormControlInput1"
             placeholder="img"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
+          {error && (
+            <p className="text-xs text-red-500 my-2">
+              Title Should be 1-128 characters
+            </p>
+          )}
         </div>
         <div>
           <label className="form-label inline-block mb-1 text-gray-700 text-xs">
@@ -51,13 +78,15 @@ const AddImage = () => {
           <label className="form-label inline-block mb-1 text-gray-700 text-xs">
             File Size
           </label>
-          <p className="text-sm font-semibold">324 kb</p>
+          <p className="text-sm font-semibold">{bytes(size)}</p>
         </div>
         <div>
           <label className="form-label inline-block mb-1 text-gray-700 text-xs">
             Dimensions
           </label>
-          <p className="text-sm font-semibold">600 x 400</p>
+          <p className="text-sm font-semibold">
+            {width}x{height}
+          </p>
         </div>
       </div>
     </div>
