@@ -1,25 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useAppSelector } from '../app/hooks'
+import { selectImages } from '../features/images/imageSlice'
 import ImageCard from './ImageCard'
 
-const ImageList = () => {
-  const [images, setImages] = useState<any[]>([])
+interface IProps {
+  setListToDelete: React.Dispatch<React.SetStateAction<string[]>>
+  listToDelete: string[]
+  checkAll: boolean
+}
 
-  useEffect(() => {
-    ;(async function () {
-      const data = await fetch(
-        'https://api.unsplash.com/photos/?client_id=-7u_QQ4JL8yujr4-xaQDCq3l7VL812xDzGElyerQ4w8&per_page=20'
-      ).then((res) => res.json())
-      setImages(data)
-      console.log(data)
-    })()
-  }, [])
+const ImageList: React.FC<IProps> = ({
+  setListToDelete,
+  listToDelete,
+  checkAll,
+}) => {
+  const images = useAppSelector(selectImages)
+
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-4">
       {images.map((image, index) => (
         <ImageCard
-          url={image.urls.small}
-          description={image.description}
+          key={image.id}
+          url={image.url}
           index={index}
+          id={image.id}
+          setListToDelete={setListToDelete}
+          listToDelete={listToDelete}
+          checkAll={checkAll}
         />
       ))}
     </div>

@@ -1,7 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
+import imageReducer from '../features/images/imageSlice'
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    images: imageReducer,
+  },
 })
 
 export type AppDispatch = typeof store.dispatch

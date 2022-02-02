@@ -1,4 +1,5 @@
 import React from 'react'
+import Modal from './modal/Modal'
 
 const Navbar = () => {
   return (
@@ -9,9 +10,7 @@ const Navbar = () => {
           create, edit, and manage the media on your community
         </p>
       </div>
-      <div className="bg-blue-500 w-auto h-8 text-white flex items-center p-2 rounded-md hover:bg-blue-400 hover:cursor-pointer">
-        Add Image
-      </div>
+      <Modal />
     </div>
   )
 }
