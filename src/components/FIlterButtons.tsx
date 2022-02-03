@@ -3,7 +3,11 @@ import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { addAll, selectImages } from '../features/images/imageSlice'
 import { sortByDate, sortBySize, sortByTitle } from '../utils/sortBy'
 
-const FIlterButtons = () => {
+interface IProps {
+  setSortBy: React.Dispatch<React.SetStateAction<string>>
+}
+
+const FIlterButtons: React.FC<IProps> = ({ setSortBy }) => {
   const images = useAppSelector(selectImages)
   const dispatch = useAppDispatch()
   return (
@@ -17,8 +21,8 @@ const FIlterButtons = () => {
           id="answer_yes"
           defaultChecked={true}
           onClick={() => {
-            console.log('clicking')
             dispatch(addAll(sortByTitle(images)))
+            setSortBy('title')
           }}
         />
         <label
@@ -36,7 +40,10 @@ const FIlterButtons = () => {
           value="no"
           name="answer"
           id="answer_no"
-          onClick={() => dispatch(addAll(sortByDate(images)))}
+          onClick={() => {
+            dispatch(addAll(sortByDate(images)))
+            setSortBy('date')
+          }}
         />
         <label
           className="flex justify-center p-0.5 items-center text-gray-400 bg-white border border-gray-300 rounded-sm cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[rgb(0,153,255)] peer-checked:ring-1 peer-checked:border-transparent peer-checked:bg-sky-100 peer-checked:text-[rgb(0,153,255)]"
@@ -53,7 +60,10 @@ const FIlterButtons = () => {
           value="maybe"
           name="answer"
           id="answer_maybe"
-          onClick={() => dispatch(addAll(sortBySize(images)))}
+          onClick={() => {
+            dispatch(addAll(sortBySize(images)))
+            setSortBy('size')
+          }}
         />
         <label
           className="flex justify-center p-0.5 items-center text-gray-400 bg-white border border-gray-300 rounded-sm cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[rgb(0,153,255)] peer-checked:ring-1 peer-checked:border-transparent peer-checked:bg-sky-100 peer-checked:text-[rgb(0,153,255)]"

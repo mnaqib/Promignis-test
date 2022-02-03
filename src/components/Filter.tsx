@@ -14,6 +14,7 @@ interface IProps {
   setIsdeleteEnabled: React.Dispatch<React.SetStateAction<boolean>>
   setListToDelete: React.Dispatch<React.SetStateAction<string[]>>
   setCheckAll: React.Dispatch<React.SetStateAction<boolean>>
+  setSortBy: React.Dispatch<React.SetStateAction<string>>
 }
 
 const Filter: React.FC<IProps> = ({
@@ -25,6 +26,7 @@ const Filter: React.FC<IProps> = ({
   checkAll,
   search,
   setSearch,
+  setSortBy,
 }) => {
   const dispatch = useAppDispatch()
 
@@ -81,7 +83,7 @@ const Filter: React.FC<IProps> = ({
           Sort By
         </div>
         <div className="flex basis-[94%] items-center p-3">
-          <ControlledRadioButtonsGroup />
+          <ControlledRadioButtonsGroup setSortBy={setSortBy} />
         </div>
       </div>
     </div>

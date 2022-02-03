@@ -1,7 +1,11 @@
 import React from 'react'
 import Modal from './modal/Modal'
 
-const Navbar = () => {
+interface IProps {
+  sortBy: string
+}
+
+const Navbar: React.FC<IProps> = ({ sortBy }) => {
   return (
     <div className="flex flex-wrap sm:justify-between">
       <div>
@@ -10,7 +14,7 @@ const Navbar = () => {
           create, edit, and manage the media on your community
         </p>
       </div>
-      <Modal />
+      <Modal sortBy={sortBy} />
     </div>
   )
 }

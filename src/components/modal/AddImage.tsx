@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import bytes from 'bytes'
 
 interface IProps {
@@ -9,7 +9,9 @@ interface IProps {
   description: string
   setTitle: React.Dispatch<React.SetStateAction<string>>
   title: string
-  error: boolean
+  error: string
+  success: boolean
+  length: number
 }
 
 const AddImage: React.FC<IProps> = ({
@@ -21,12 +23,26 @@ const AddImage: React.FC<IProps> = ({
   title,
   setTitle,
   error,
+  success,
+  length,
 }) => {
+  useEffect(() => {
+    if (!success) {
+      description.length > 0
+        ? setTitle(description)
+        : setTitle(`img-${length + 1}`)
+    }
+  }, [])
+
   return (
     <div className="flex flex-col basis-full m-2 p-2 max-h-96">
       <div>
         <img
-          className="object-cover basis-36 mx-1 my-1 max-h-96 rounded"
+          className={
+            success
+              ? 'object-cover basis-36 mx-1 my-1 max-h-96 rounded opacity-50'
+              : 'object-cover basis-36 mx-1 my-1 max-h-96 rounded'
+          }
           src={url}
           alt=""
         />
@@ -62,9 +78,11 @@ const AddImage: React.FC<IProps> = ({
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          {error && (
+          {error.length > 0 && (
             <p className="text-xs text-red-500 my-2">
-              Title Should be 1-128 characters
+              {error === 'char'
+                ? 'Title Should be 1-128 characters'
+                : 'Image already in list'}
             </p>
           )}
         </div>

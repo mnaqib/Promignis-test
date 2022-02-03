@@ -17,6 +17,7 @@ const ImageList: React.FC<IProps> = ({
     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
       {images.map((image) => (
         <ImageCard
+          key={image.id}
           url={image.url}
           description={image.description}
           id={image.id}

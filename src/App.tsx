@@ -15,6 +15,7 @@ function App() {
   const [checkAll, setCheckAll] = useState(false)
   const data = useAppSelector(selectImages)
   const [search, setSearch] = useState('')
+  const [sortBy, setSortBy] = useState('title')
 
   useEffect(() => {
     ;(async function () {
@@ -28,7 +29,7 @@ function App() {
           url: result.urls.small,
           date: result.created_at,
           size: result.height * result.width,
-          description: result.description,
+          description: result.description ? result.description.split(' ') : '',
         }
       })
       data = sortByTitle(data)
@@ -55,7 +56,7 @@ function App() {
 
   return (
     <div className="mx-6 my-10">
-      <Navbar />
+      <Navbar sortBy={sortBy} />
       <Filter
         isdeleteEnabled={isdeleteEnabled}
         listToDelete={listToDelete}
@@ -65,6 +66,7 @@ function App() {
         checkAll={checkAll}
         search={search}
         setSearch={setSearch}
+        setSortBy={setSortBy}
       />
       <ImageList
         setListToDelete={setListToDelete}

@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addImage, Image } from '../../features/images/imageSlice'
+import { useAppSelector } from '../../app/hooks'
+import {
+  addAll,
+  addImage,
+  Image,
+  selectImages,
+} from '../../features/images/imageSlice'
+import { sortByDate, sortBySize, sortByTitle } from '../../utils/sortBy'
 import Search from '../Search'
 import AddImage from './AddImage'
 import ImageList from './ImageList'
@@ -10,7 +17,11 @@ interface IState extends Image {
   height: number
 }
 
-export default function Modal() {
+interface IProps {
+  sortBy: string
+}
+
+const Modal: React.FC<IProps> = ({ sortBy }) => {
   const [showModal, setShowModal] = useState(false)
   const [addImageModal, setAddImageModal] = useState(false)
   const [search, setSearch] = useState('')
@@ -18,12 +29,13 @@ export default function Modal() {
   const [selectedImage, setSelectedImage] = useState('')
   const [image, setImage] = useState<IState>()
   const [title, setTitle] = useState('')
-  const [error, setError] = useState(false)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState(false)
+  const [sort, setSort] = useState(false)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    ;(async function () {})()
-  }, [])
+  const imageSet = useAppSelector(selectImages)
+  const length = imageSet.length
 
   useEffect(() => {
     if (selectedImage) {
@@ -32,8 +44,21 @@ export default function Modal() {
   }, [selectedImage])
 
   useEffect(() => {
-    setError(false)
+    setError('')
   }, [title])
+
+  useEffect(() => {
+    if (sort) {
+      console.log('ran')
+      if (sortBy === 'title') {
+        dispatch(addAll(sortByTitle(imageSet)))
+      } else if (sortBy === 'date') {
+        dispatch(addAll(sortByDate(imageSet)))
+      } else {
+        dispatch(addAll(sortBySize(imageSet)))
+      }
+    }
+  }, [sort])
 
   const searchImage = async () => {
     const { results: response } = await fetch(
@@ -42,7 +67,7 @@ export default function Modal() {
     let data: IState[] = response.map((result: any, index: number) => {
       return {
         id: result.id,
-        description: `img-${index}.jpg`,
+        description: result.description ? result.description.split(' ')[0] : '',
         url: result.urls.small,
         date: result.created_at,
         size: result.height * result.width,
@@ -53,10 +78,22 @@ export default function Modal() {
     setImages(data)
   }
 
+  function unShowModal() {
+    setAddImageModal(false)
+    setShowModal(false)
+    setSuccess(false)
+    setSort(false)
+    setImage(undefined)
+  }
+
   const handleAddImage = () => {
     if (title.length > 128 || title.length < 1) {
-      setError(true)
+      setError('char')
     } else {
+      if (image && imageSet.find((img) => img.id === image.id)) {
+        return setError('inList')
+      }
+      image && console.log(imageSet.find((img) => img.id === image.id))
       image &&
         dispatch(
           addImage({
@@ -65,12 +102,14 @@ export default function Modal() {
             description: image.description,
             id: image.id,
             size: image.size,
-            title,
+            title: title.concat('.jpg'),
           })
         )
+      setSort(true)
       setTitle('')
-      setShowModal(false)
-      setAddImageModal(false)
+      setSelectedImage('')
+      setSuccess(true)
+      setTimeout(unShowModal, 500)
     }
   }
 
@@ -90,7 +129,15 @@ export default function Modal() {
           <div className="justify-center items-center flex fixed inset-0 z-50 outline-none focus:outline-none">
             {/*content*/}
             {addImageModal ? (
-              <div className="relative my-6 mx-24 w-[44.5 rem] h-[48.1875 rem]">
+              <div
+                className={
+                  success
+                    ? 'relative my-6 mx-24 w-[44.5 rem] h-[48.1875 rem] border-4 border-green-300'
+                    : error.length > 0
+                    ? 'relative my-6 mx-24 w-[44.5 rem] h-[48.1875 rem] border-4 border-red-300 '
+                    : 'relative my-6 mx-24 w-[44.5 rem] h-[48.1875 rem]'
+                }
+              >
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                   {/*header*/}
                   <div className="flex items-start justify-between m-5">
@@ -134,6 +181,8 @@ export default function Modal() {
                           title={title}
                           setTitle={setTitle}
                           error={error}
+                          success={success}
+                          length={length}
                         />
                       )}
                     </div>
@@ -224,3 +273,5 @@ export default function Modal() {
     </>
   )
 }
+
+export default Modal

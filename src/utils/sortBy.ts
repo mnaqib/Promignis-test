@@ -3,8 +3,8 @@ import { Image } from '../features/images/imageSlice'
 export function sortByTitle(data: Image[]): Image[] {
   const sorted = [...data]
   sorted.sort(function (a, b) {
-    const titleA = a.description?.split(' ')[0]
-    const titleB = b.description?.split(' ')[0]
+    const titleA = a.description
+    const titleB = b.description
     if (titleA < titleB) {
       return -1
     }
