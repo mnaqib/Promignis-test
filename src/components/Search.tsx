@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 interface IProps {
   search: string
@@ -6,11 +6,18 @@ interface IProps {
 }
 
 const Search: React.FC<IProps> = ({ search, setSearch }) => {
+  const [focus, setFocus] = useState(false)
   return (
-    <div className="flex items-center p-2 h-8 w-60 border-2 border-gray-200 ">
+    <div
+      className={
+        focus
+          ? 'flex items-center p-2 h-8 w-60 border-2 border-blue-400 rounded'
+          : 'flex items-center p-2 h-8 w-60 border border-gray-200 rounded'
+      }
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-4 w-5 text-gray-400"
+        className="h-4 w-5 text-gray-300"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -25,9 +32,11 @@ const Search: React.FC<IProps> = ({ search, setSearch }) => {
       <input
         type="text"
         placeholder="Search Media"
-        className="ml-2 text-xs h-7 w-48 focus:outline-none transition ease-in-out focus:text-gray-700 focus:bg-white"
+        className="ml-2 text-sm placeholder:text-grayCustom placeholder:opacity-25 font-semibold h-7 w-48 focus:outline-none transition ease-in-out focus:text-gray-500 focus:font-medium focus:bg-white"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        onFocus={() => setFocus(true)}
+        onBlur={() => setFocus(false)}
       />
     </div>
   )

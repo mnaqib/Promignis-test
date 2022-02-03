@@ -30,29 +30,26 @@ const AddImage: React.FC<IProps> = ({
     if (!success) {
       description.length > 0
         ? setTitle(description)
-        : setTitle(`img-${length + 1}`)
+        : setTitle(`img${length + 1}`)
     }
   }, [])
 
   return (
-    <div className="flex flex-col basis-full m-2 p-2 max-h-96">
-      <div>
+    <div className="flex flex-col basis-full mx-4 mt-4">
+      <div className="rounded">
         <img
           className={
             success
-              ? 'object-cover basis-36 mx-1 my-1 max-h-96 rounded opacity-50'
-              : 'object-cover basis-36 mx-1 my-1 max-h-96 rounded'
+              ? 'object-cover w-[24rem] h-[12rem] xs:w-[34rem] xs:h-[17rem] sm:w-[37.5rem] sm:h-[20rem] opacity-50'
+              : 'object-cover w-[24rem] h-[12rem] xs:w-[34rem] xs:h-[17rem] sm:w-[37.5rem] sm:h-[20rem]'
           }
           src={url}
           alt=""
         />
       </div>
-      <div className="flex justify-between mt-5 items-center">
-        <div className="mb-3 basis-[40%]">
-          <label
-            htmlFor="exampleFormControlInput1"
-            className="form-label inline-block mb-2 text-gray-700 text-xs"
-          >
+      <div className="flex gap-1 flex-wrap sm:justify-between justify-center mt-6">
+        <div className="mb-3 xs:mb-6 mr-2">
+          <label className="form-label inline-block mb-1 text-grayCustom/50 text-xs">
             Title
           </label>
           <input
@@ -60,12 +57,12 @@ const AddImage: React.FC<IProps> = ({
             className="
         form-control
         block
-        w-fit
+        w-[19.25rem]
         px-3
         py-1.5
         text-base
-        font-normal
-        text-gray-700
+        font-semibold
+        text-grayCustom/75
         bg-white bg-clip-padding
         border border-solid border-gray-300
         rounded
@@ -86,25 +83,27 @@ const AddImage: React.FC<IProps> = ({
             </p>
           )}
         </div>
-        <div>
-          <label className="form-label inline-block mb-1 text-gray-700 text-xs">
-            File Type
-          </label>
-          <p className="text-sm font-semibold">JPG</p>
-        </div>
-        <div>
-          <label className="form-label inline-block mb-1 text-gray-700 text-xs">
-            File Size
-          </label>
-          <p className="text-sm font-semibold">{bytes(size)}</p>
-        </div>
-        <div>
-          <label className="form-label inline-block mb-1 text-gray-700 text-xs">
-            Dimensions
-          </label>
-          <p className="text-sm font-semibold">
-            {width}x{height}
-          </p>
+        <div className="flex sm:gap-4 gap-6 mt-3 mb-3 ">
+          <div>
+            <label className="form-label inline-block mb-1 text-grayCustom/50 text-xs">
+              File Type
+            </label>
+            <p className="text-sm font-semibold">JPG</p>
+          </div>
+          <div>
+            <label className="form-label inline-block mb-1 text-grayCustom/50 text-xs">
+              File Size
+            </label>
+            <p className="text-sm font-semibold">{bytes(size)}</p>
+          </div>
+          <div>
+            <label className="form-label inline-block mb-1 text-grayCustom/50 text-xs">
+              Dimensions
+            </label>
+            <p className="text-sm font-semibold">
+              {width}x{height}
+            </p>
+          </div>
         </div>
       </div>
     </div>

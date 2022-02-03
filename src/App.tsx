@@ -25,7 +25,7 @@ function App() {
       let data: Image[] = response.map((result: any, index: number) => {
         return {
           id: result.id,
-          title: `img-${index}.jpg`,
+          title: `img${index}.jpg`,
           url: result.urls.small,
           date: result.created_at,
           size: result.height * result.width,
@@ -55,7 +55,7 @@ function App() {
   }, [checkAll])
 
   return (
-    <div className="mx-6 my-10 font-SFProText">
+    <div className="mx-6 font-SFProText">
       <Navbar sortBy={sortBy} />
       <Filter
         isdeleteEnabled={isdeleteEnabled}

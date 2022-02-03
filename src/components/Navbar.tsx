@@ -7,14 +7,16 @@ interface IProps {
 
 const Navbar: React.FC<IProps> = ({ sortBy }) => {
   return (
-    <div className="flex flex-wrap sm:justify-between">
-      <div>
-        <p className="text-2xl font-semibold text-gray-600">Media Library</p>
-        <p className="text-gray-400 mt-2 mb-3 sm:mt-2 ">
-          create, edit, and manage the media on your community
+    <div className="flex flex-col sm:flex-row sm:justify-between pt-5 mt-5">
+      <div className="mb-4 sm:mb-0">
+        <p className="text-xl font-semibold text-grayCustom">Media Library</p>
+        <p className="text-grayCustom opacity-50 mt-2.5 text-sm ">
+          Create, edit, and manage the media on your community
         </p>
       </div>
-      <Modal sortBy={sortBy} />
+      <div className="mb-4 sm:mb-0">
+        <Modal sortBy={sortBy} />
+      </div>
     </div>
   )
 }

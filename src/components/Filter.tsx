@@ -31,23 +31,28 @@ const Filter: React.FC<IProps> = ({
   const dispatch = useAppDispatch()
 
   return (
-    <div className="flex flex-col border-gray-200 border-2 h-28 mt-1 mb-8">
-      <div className="flex basis-full border-gray-200 border-b-2 h-16">
-        <div className="flex flex-col md:flex-row basis-[8%] justify-center items-center border-gray-200 border-r-2">
-          <CheckboxAll
-            setIsdeleteEnabled={setIsdeleteEnabled}
-            setCheckAll={setCheckAll}
-            checkAll={checkAll}
-            listToDelete={listToDelete}
-          />
-          <p className="text-gray-500 font-medium text-sm">Select All</p>
+    <div className="flex flex-col border-gray-200 border h-40 xs:h-28 mt-3 mb-8 rounded-md">
+      <div className="flex basis-full flex-col xs:flex-row border-gray-200 border-b h-16">
+        <div className="flex xs:basis-[25%] sm:basis-[20%] lg:basis-[15%] mt-2 ml-4 xs:ml-0 xs: mt:0 xs:justify-center items-center border-gray-200 xs:border-r">
+          <div>
+            <CheckboxAll
+              setIsdeleteEnabled={setIsdeleteEnabled}
+              setCheckAll={setCheckAll}
+              checkAll={checkAll}
+              listToDelete={listToDelete}
+            />
+          </div>
+
+          <div className="text-grayCustom opacity-75 font-semibold text-xs xs:text-sm">
+            Select All
+          </div>
         </div>
-        <div className="flex basis-[92%] items-center justify-between p-4">
+        <div className="flex xs:basis-[75%] sm:basis-[80%] lg:basis-[85%] items-center justify-between p-4">
           <button
             disabled={!isdeleteEnabled}
             className={
               isdeleteEnabled
-                ? 'cursor-pointer'
+                ? 'cursor-pointer text-gray-500'
                 : 'text-gray-300 cursor-default'
             }
             onClick={() => {
@@ -60,7 +65,7 @@ const Filter: React.FC<IProps> = ({
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="h-5 w-5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -79,10 +84,10 @@ const Filter: React.FC<IProps> = ({
         </div>
       </div>
       <div className="flex basis-full">
-        <div className="flex basis-[6%] text-xs sm:text-base justify-center items-center border-gray-200 border-r-2">
+        <div className="flex basis-[16%] xs:basis-[13%] sm:basis-[10%] lg:basis-[7%] text-xs xs:text-sm justify-center items-center border-gray-200 border-r text-grayCustom opacity-75 font-semibold">
           Sort By
         </div>
-        <div className="flex basis-[94%] items-center p-3">
+        <div className="flex basis-[84%] xs:basis-[87%] sm:basis-[90%] lg:basis-[93%] items-center p-3">
           <ControlledRadioButtonsGroup setSortBy={setSortBy} />
         </div>
       </div>

@@ -117,7 +117,7 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
     <>
       <div>
         <button
-          className="bg-blue-500 text-white active:bg-blue-600 text-sm px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+          className="bg-gradient-to-b from-[#0099FF] to-[#0B79C3] text-white active:bg-blue-600 font-medium text-sm px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
           type="button"
           onClick={() => setShowModal(true)}
         >
@@ -132,18 +132,22 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
               <div
                 className={
                   success
-                    ? 'relative my-6 mx-24 w-[44.5 rem] h-[48.1875 rem] border-4 border-green-300 rounded-lg'
+                    ? 'flex border-4 border-green-300 rounded-lg'
                     : error.length > 0
-                    ? 'relative my-6 mx-24 w-[44.5 rem] h-[48.1875 rem] border-4 border-red-300 rounded-lg'
-                    : 'relative my-6 mx-24 w-[44.5 rem] h-[48.1875 rem]'
+                    ? 'flex border-4 border-red-300 rounded-lg'
+                    : 'flex'
                 }
               >
-                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div className="border-0 rounded-lg shadow-lg flex flex-col bg-white outline-none focus:outline-none">
                   {/*header*/}
-                  <div className="flex items-start justify-between m-5">
+                  <div className="flex items-start justify-between mx-5 mt-5">
                     <div className="flex flex-col">
-                      <h3 className="text-2xl font-semibold">Add Image</h3>
-                      <p className="mb-5">Edit your media files here</p>
+                      <div className="text-xl font-bold text-grayCustom/75 opacity-75">
+                        Add Image
+                      </div>
+                      <p className=" text-grayCustom/75 opacity-50 text-xs">
+                        Edit your media files here
+                      </p>
                     </div>
 
                     <div>
@@ -154,7 +158,7 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
                           setSelectedImage('')
                         }}
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 cursor-pointer"
+                        className="h-5 w-5 text-grayCustom/25 cursor-pointer hover:text-gray-800"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -169,8 +173,8 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
                     </div>
                   </div>
                   {/*body*/}
-                  <div className=" mx-5 p-4 border-2 rounded border-dashed border-gray-300">
-                    <div className="m-2">
+                  <div className=" mx-5 mt-2 border-[3px] rounded border-dashed border-[#CCD2E2BF]/75">
+                    <div>
                       {image && (
                         <AddImage
                           url={image.url}
@@ -190,7 +194,7 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
                   {/*footer*/}
                   <div className="flex items-center justify-end p-6">
                     <button
-                      className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="bg-gradient-to-b from-[#0099FF] to-[#0B79C3] text-white active:bg-blue-600 text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                       type="button"
                       onClick={handleAddImage}
                     >
@@ -205,14 +209,18 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
                   {/*header*/}
                   <div className="flex items-start justify-between m-5">
                     <div className="flex flex-col">
-                      <h3 className="text-2xl font-semibold">Select Image</h3>
-                      <p className="mb-5">Search and select an image</p>
+                      <h3 className="text-2xl font-semibold text-gray-400">
+                        Select Image
+                      </h3>
+                      <p className="mb-5 text-gray-300 text-xs">
+                        Search and select an image
+                      </p>
                       <div className="flex">
                         <Search search={search} setSearch={setSearch} />
                         <button
                           onClick={searchImage}
                           type="button"
-                          className="inline-block mx-3 px-2 py-1 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                          className="inline-block mx-3 px-2 py-1 bg-gradient-to-b from-[#F1F5FA] to-[#FDFEFF] text-[#354052] opacity-75 font-[600] text-xs leading-tight rounded shadow hover:shadow-lg transition duration-150 ease-in-out"
                         >
                           Search
                         </button>
@@ -254,7 +262,7 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
                   <div className="flex items-center justify-end p-6">
                     <button
                       disabled={selectedImage ? false : true}
-                      className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="bg-gradient-to-b from-[#0099FF] to-[#0B79C3] text-white active:bg-blue-600 text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
                       type="button"
                       onClick={() => {
                         setAddImageModal(true)

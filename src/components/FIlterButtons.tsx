@@ -11,14 +11,14 @@ const FIlterButtons: React.FC<IProps> = ({ setSortBy }) => {
   const images = useAppSelector(selectImages)
   const dispatch = useAppDispatch()
   return (
-    <ul className="grid grid-cols-3 gap-x-5 text-xs">
+    <ul className="grid grid-cols-3 gap-x-5 text-xs font-medium">
       <li className="relative">
         <input
           className="sr-only peer"
           type="radio"
-          value="yes"
-          name="answer"
-          id="answer_yes"
+          value="title"
+          name="filter"
+          id="answer_title"
           defaultChecked={true}
           onClick={() => {
             dispatch(addAll(sortByTitle(images)))
@@ -26,8 +26,8 @@ const FIlterButtons: React.FC<IProps> = ({ setSortBy }) => {
           }}
         />
         <label
-          className="flex justify-center p-0.5 items-center w-14 text-gray-400 bg-white border border-gray-300 rounded-sm cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[rgb(0,153,255)] peer-checked:ring-1 peer-checked:border-transparent peer-checked:bg-sky-100 peer-checked:text-[rgb(0,153,255)]"
-          htmlFor="answer_yes"
+          className="flex justify-center p-0.5 items-center w-[3.375rem] h-6 text-gray-400 bg-white border border-gray-300 rounded-sm cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blueCustom peer-checked:ring-1 peer-checked:border-transparent peer-checked:bg-blueCustom peer-checked:bg-opacity-[0.08] peer-checked:text-blueCustom"
+          htmlFor="answer_title"
         >
           Title
         </label>
@@ -37,17 +37,17 @@ const FIlterButtons: React.FC<IProps> = ({ setSortBy }) => {
         <input
           className="sr-only peer"
           type="radio"
-          value="no"
-          name="answer"
-          id="answer_no"
+          value="date"
+          name="filter"
+          id="answer_date"
           onClick={() => {
             dispatch(addAll(sortByDate(images)))
             setSortBy('date')
           }}
         />
         <label
-          className="flex justify-center p-0.5 items-center text-gray-400 bg-white border border-gray-300 rounded-sm cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[rgb(0,153,255)] peer-checked:ring-1 peer-checked:border-transparent peer-checked:bg-sky-100 peer-checked:text-[rgb(0,153,255)]"
-          htmlFor="answer_no"
+          className="flex justify-center p-0.5 items-center w-[3.375rem] h-6 text-gray-400 bg-white border border-gray-300 rounded-sm cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blueCustom peer-checked:ring-1 peer-checked:border-transparent peer-checked:bg-blueCustom peer-checked:bg-opacity-[0.08] peer-checked:text-blueCustom"
+          htmlFor="answer_date"
         >
           Date
         </label>
@@ -57,17 +57,17 @@ const FIlterButtons: React.FC<IProps> = ({ setSortBy }) => {
         <input
           className="sr-only peer"
           type="radio"
-          value="maybe"
-          name="answer"
-          id="answer_maybe"
+          value="size"
+          name="filter"
+          id="answer_size"
           onClick={() => {
             dispatch(addAll(sortBySize(images)))
             setSortBy('size')
           }}
         />
         <label
-          className="flex justify-center p-0.5 items-center text-gray-400 bg-white border border-gray-300 rounded-sm cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-[rgb(0,153,255)] peer-checked:ring-1 peer-checked:border-transparent peer-checked:bg-sky-100 peer-checked:text-[rgb(0,153,255)]"
-          htmlFor="answer_maybe"
+          className="flex justify-center p-0.5 items-center w-[3.375rem] h-6 text-gray-400 bg-white border border-gray-300 rounded-sm cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-blueCustom peer-checked:ring-1 peer-checked:border-transparent peer-checked:bg-blueCustom peer-checked:bg-opacity-[0.08] peer-checked:text-blueCustom"
+          htmlFor="answer_size"
         >
           Size
         </label>
