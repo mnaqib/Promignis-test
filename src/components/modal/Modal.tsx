@@ -132,9 +132,9 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
               <div
                 className={
                   success
-                    ? 'relative my-6 mx-24 w-[44.5 rem] h-[48.1875 rem] border-4 border-green-300'
+                    ? 'relative my-6 mx-24 w-[44.5 rem] h-[48.1875 rem] border-4 border-green-300 rounded-lg'
                     : error.length > 0
-                    ? 'relative my-6 mx-24 w-[44.5 rem] h-[48.1875 rem] border-4 border-red-300 '
+                    ? 'relative my-6 mx-24 w-[44.5 rem] h-[48.1875 rem] border-4 border-red-300 rounded-lg'
                     : 'relative my-6 mx-24 w-[44.5 rem] h-[48.1875 rem]'
                 }
               >

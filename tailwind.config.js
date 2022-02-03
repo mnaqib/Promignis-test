@@ -1,7 +1,11 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        SFProText: ['SFProText'],
+      },
+    },
   },
   plugins: [require('tw-elements/dist/plugin')],
 }

@@ -55,7 +55,7 @@ function App() {
   }, [checkAll])
 
   return (
-    <div className="mx-6 my-10">
+    <div className="mx-6 my-10 font-SFProText">
       <Navbar sortBy={sortBy} />
       <Filter
         isdeleteEnabled={isdeleteEnabled}
