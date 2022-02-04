@@ -65,7 +65,7 @@ function App() {
     listToDelete.length > 0
       ? setIsdeleteEnabled(true)
       : setIsdeleteEnabled(false)
-    if (listToDelete.length === data.length) {
+    if (data.length > 0 && listToDelete.length === data.length) {
       setCheckAll(true)
     } else {
       setCheckAll(false)

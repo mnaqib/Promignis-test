@@ -65,7 +65,6 @@ const Filter: React.FC<IProps> = ({
             }
             onClick={() => {
               dispatch(removeImage(listToDelete))
-
               setIsdeleteEnabled(false)
               setCheckAll(false)
               setListToDelete([])
