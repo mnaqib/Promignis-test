@@ -35,13 +35,13 @@ const AddImage: React.FC<IProps> = ({
   }, [])
 
   return (
-    <div className="flex flex-col basis-full mx-4 mt-4">
+    <div className="flex flex-col basis-auto mx-4 mt-4">
       <div className="rounded">
         <img
           className={
             success
-              ? 'object-cover w-[24rem] h-[12rem] xs:w-[34rem] xs:h-[17rem] sm:w-[37.5rem] sm:h-[20rem] opacity-50'
-              : 'object-cover w-[24rem] h-[12rem] xs:w-[34rem] xs:h-[17rem] sm:w-[37.5rem] sm:h-[20rem]'
+              ? 'object-cover w-[20rem] h-[10rem] xs:w-[34rem] xs:h-[17rem] sm:w-[37.5rem] sm:h-[20rem] opacity-50'
+              : 'object-cover w-[20rem] h-[10rem] xs:w-[34rem] xs:h-[17rem] sm:w-[37.5rem] sm:h-[20rem]'
           }
           src={url}
           alt=""
@@ -49,7 +49,7 @@ const AddImage: React.FC<IProps> = ({
       </div>
       <div className="flex gap-1 flex-wrap sm:justify-between justify-center mt-6">
         <div className="mb-3 xs:mb-6 mr-2">
-          <label className="form-label inline-block mb-1 text-grayCustom/50 text-xs">
+          <label className="form-label inline mb-1 text-grayCustom/50 text-xs">
             Title
           </label>
           <input
@@ -57,7 +57,8 @@ const AddImage: React.FC<IProps> = ({
             className="
         form-control
         block
-        w-[19.25rem]
+        w-[15rem]
+        xs:w-[19.25rem]
         px-3
         py-1.5
         text-base
@@ -85,19 +86,19 @@ const AddImage: React.FC<IProps> = ({
         </div>
         <div className="flex sm:gap-4 gap-6 mt-3 mb-3 ">
           <div>
-            <label className="form-label inline-block mb-1 text-grayCustom/50 text-xs">
+            <label className="form-label inline mb-1 text-grayCustom/50 text-xs">
               File Type
             </label>
             <p className="text-sm font-semibold">JPG</p>
           </div>
           <div>
-            <label className="form-label inline-block mb-1 text-grayCustom/50 text-xs">
+            <label className="form-label inline mb-1 text-grayCustom/50 text-xs">
               File Size
             </label>
             <p className="text-sm font-semibold">{bytes(size)}</p>
           </div>
           <div>
-            <label className="form-label inline-block mb-1 text-grayCustom/50 text-xs">
+            <label className="form-label inline mb-1 text-grayCustom/50 text-xs">
               Dimensions
             </label>
             <p className="text-sm font-semibold">

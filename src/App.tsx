@@ -68,12 +68,18 @@ function App() {
         setSearch={setSearch}
         setSortBy={setSortBy}
       />
-      <ImageList
-        setListToDelete={setListToDelete}
-        listToDelete={listToDelete}
-        checkAll={checkAll}
-        search={search}
-      />
+      {data.length > 0 ? (
+        <ImageList
+          setListToDelete={setListToDelete}
+          listToDelete={listToDelete}
+          checkAll={checkAll}
+          search={search}
+        />
+      ) : (
+        <div className="flex mt-[15%] justify-center items-center text-xl font-bold text-grayCustom/50">
+          No Media in List
+        </div>
+      )}
     </div>
   )
 }

@@ -132,13 +132,13 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
               <div
                 className={
                   success
-                    ? 'flex border-4 border-green-300 rounded-lg'
+                    ? 'flex basis-auto flex-col border-4 border-green-300 rounded-lg mx-1'
                     : error.length > 0
-                    ? 'flex border-4 border-red-300 rounded-lg'
-                    : 'flex'
+                    ? 'flex basis-auto flex-col border-4 border-red-300 rounded-lg mx-1'
+                    : 'flex basis-auto flex-col mx-1'
                 }
               >
-                <div className="border-0 rounded-lg shadow-lg flex flex-col bg-white outline-none focus:outline-none">
+                <div className="border-0 rounded-lg shadow-lg basis-auto bg-white outline-none focus:outline-none">
                   {/*header*/}
                   <div className="flex items-start justify-between mx-5 mt-5">
                     <div className="flex flex-col">
@@ -153,7 +153,6 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
                     <div>
                       <svg
                         onClick={() => {
-                          setShowModal(false)
                           setAddImageModal(false)
                           setSelectedImage('')
                         }}
@@ -204,15 +203,15 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
                 </div>
               </div>
             ) : (
-              <div className="relative my-6 mx-24 w-[74.375rem] h-[48.1875 rem]">
+              <div className="flex basis-auto mx-1">
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                   {/*header*/}
                   <div className="flex items-start justify-between m-5">
                     <div className="flex flex-col">
-                      <h3 className="text-2xl font-semibold text-gray-400">
+                      <div className="text-2xl font-bold text-grayCustom/75 opacity-75">
                         Select Image
-                      </h3>
-                      <p className="mb-5 text-gray-300 text-xs">
+                      </div>
+                      <p className="mb-5 text-grayCustom/75 opacity-50 text-xs">
                         Search and select an image
                       </p>
                       <div className="flex">
@@ -220,7 +219,7 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
                         <button
                           onClick={searchImage}
                           type="button"
-                          className="inline-block mx-3 px-2 py-1 bg-gradient-to-b from-[#F1F5FA] to-[#FDFEFF] text-[#354052] opacity-75 font-[600] text-xs leading-tight rounded shadow hover:shadow-lg transition duration-150 ease-in-out"
+                          className="inline-block mx-3 px-2 py-1 bg-gradient-to-b from-[#F1F5FA] to-[#FDFEFF] text-grayCustom/75 font-semibold text-xs leading-tight rounded shadow hover:shadow-lg transition duration-150 ease-in-out"
                         >
                           Search
                         </button>
@@ -231,10 +230,11 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
                       <svg
                         onClick={() => {
                           setShowModal(false)
+                          setAddImageModal(false)
                           setSelectedImage('')
                         }}
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 cursor-pointer"
+                        className="h-5 w-5 text-grayCustom/25 cursor-pointer hover:text-gray-800"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -249,13 +249,21 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
                     </div>
                   </div>
                   {/*body*/}
-                  <div className=" mx-5 p-4 border-2 rounded border-dashed border-gray-300 overflow-y-auto max-h-96 ">
-                    <div className="m-2">
-                      <ImageList
-                        images={images}
-                        selectedImage={selectedImage}
-                        setSelectedImage={setSelectedImage}
-                      />
+                  <div
+                    className={
+                      images.length > 0
+                        ? ' mx-5 border-2 flex justify-center rounded-xl border-dashed border-gray-300 max-h-80'
+                        : ' mx-5 flex justify-center border-none'
+                    }
+                  >
+                    <div className="basis-auto overflow-y-auto m-2">
+                      <div className="mx-2">
+                        <ImageList
+                          images={images}
+                          selectedImage={selectedImage}
+                          setSelectedImage={setSelectedImage}
+                        />
+                      </div>
                     </div>
                   </div>
                   {/*footer*/}
@@ -275,7 +283,6 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
               </div>
             )}
           </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
     </>

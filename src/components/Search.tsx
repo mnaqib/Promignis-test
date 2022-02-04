@@ -32,7 +32,7 @@ const Search: React.FC<IProps> = ({ search, setSearch }) => {
       <input
         type="text"
         placeholder="Search Media"
-        className="ml-2 text-sm placeholder:text-grayCustom placeholder:opacity-25 font-semibold h-7 w-48 focus:outline-none transition ease-in-out focus:text-gray-500 focus:font-medium focus:bg-white"
+        className="ml-2 text-xs placeholder:text-grayCustom placeholder:opacity-25 h-7 w-48 focus:outline-none transition ease-in-out text-grayCustom/75 font-semibold focus:bg-white"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         onFocus={() => setFocus(true)}
