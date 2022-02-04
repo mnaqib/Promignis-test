@@ -1,7 +1,8 @@
 import React from 'react'
+import { Id } from '../App'
 import { useAppDispatch } from '../app/hooks'
 import { removeImage } from '../features/images/imageSlice'
-import CheckboxAll from './checkbox/CheckboxAll'
+import Checkbox from './Checkbox'
 import ControlledRadioButtonsGroup from './FIlterButtons'
 import Search from './Search'
 
@@ -10,11 +11,13 @@ interface IProps {
   listToDelete: string[]
   checkAll: boolean
   search: string
+  ids: Id[]
   setSearch: React.Dispatch<React.SetStateAction<string>>
   setIsdeleteEnabled: React.Dispatch<React.SetStateAction<boolean>>
   setListToDelete: React.Dispatch<React.SetStateAction<string[]>>
   setCheckAll: React.Dispatch<React.SetStateAction<boolean>>
   setSortBy: React.Dispatch<React.SetStateAction<string>>
+  setIds: React.Dispatch<React.SetStateAction<Id[]>>
 }
 
 const Filter: React.FC<IProps> = ({
@@ -27,6 +30,8 @@ const Filter: React.FC<IProps> = ({
   search,
   setSearch,
   setSortBy,
+  ids,
+  setIds,
 }) => {
   const dispatch = useAppDispatch()
 
@@ -35,11 +40,14 @@ const Filter: React.FC<IProps> = ({
       <div className="flex basis-full flex-col xs:flex-row border-gray-200 border-b h-16">
         <div className="flex xs:basis-[25%] sm:basis-[20%] lg:basis-[15%] mt-2 ml-4 xs:ml-0 xs: mt:0 xs:justify-center items-center border-gray-200 xs:border-r">
           <div>
-            <CheckboxAll
-              setIsdeleteEnabled={setIsdeleteEnabled}
-              setCheckAll={setCheckAll}
+            <Checkbox
+              ids={ids}
+              setIds={setIds}
+              name="checkAll"
               checkAll={checkAll}
+              setCheckAll={setCheckAll}
               listToDelete={listToDelete}
+              setListToDelete={setListToDelete}
             />
           </div>
 

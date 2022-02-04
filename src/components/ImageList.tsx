@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from 'react'
+import { Id } from '../App'
 import { useAppSelector } from '../app/hooks'
 import { Image, selectImages } from '../features/images/imageSlice'
 import ImageCard from './ImageCard'
 
 interface IProps {
   setListToDelete: React.Dispatch<React.SetStateAction<string[]>>
+  setCheckAll: React.Dispatch<React.SetStateAction<boolean>>
+  setIds: React.Dispatch<React.SetStateAction<Id[]>>
+  ids: Id[]
   listToDelete: string[]
-  checkAll: boolean
   search: string
+  checkAll: boolean
 }
 
 const ImageList: React.FC<IProps> = ({
   setListToDelete,
   listToDelete,
-  checkAll,
   search,
+  setCheckAll,
+  checkAll,
+  ids,
+  setIds,
 }) => {
   const images = useAppSelector(selectImages)
   const [imageList, setImageList] = useState<Image[]>(images)
@@ -33,7 +40,10 @@ const ImageList: React.FC<IProps> = ({
           id={image.id}
           setListToDelete={setListToDelete}
           listToDelete={listToDelete}
+          setCheckAll={setCheckAll}
           checkAll={checkAll}
+          ids={ids}
+          setIds={setIds}
         />
       ))}
     </div>

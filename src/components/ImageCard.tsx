@@ -1,13 +1,17 @@
 import React from 'react'
-import CheckboxImage from './checkbox/CheckBoxImage'
+import { Id } from '../App'
+import Checkbox from './Checkbox'
 
 interface IProps {
   url: string
   id: string
-  setListToDelete: React.Dispatch<React.SetStateAction<string[]>>
   listToDelete: string[]
-  checkAll: boolean
   title: string
+  checkAll: boolean
+  ids: Id[]
+  setIds: React.Dispatch<React.SetStateAction<Id[]>>
+  setListToDelete: React.Dispatch<React.SetStateAction<string[]>>
+  setCheckAll: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ImageCard: React.FC<IProps> = ({
@@ -15,17 +19,23 @@ const ImageCard: React.FC<IProps> = ({
   id,
   setListToDelete,
   listToDelete,
-  checkAll,
   title,
+  setCheckAll,
+  checkAll,
+  ids,
+  setIds,
 }) => {
   return (
     <div className="flex basis-40 flex-col h-[7.75rem]">
       <div className="absolute">
-        <CheckboxImage
-          setListToDelete={setListToDelete}
-          id={id}
-          listToDelete={listToDelete}
+        <Checkbox
+          name={id}
+          ids={ids}
+          setIds={setIds}
+          setCheckAll={setCheckAll}
           checkAll={checkAll}
+          listToDelete={listToDelete}
+          setListToDelete={setListToDelete}
         />
       </div>
 

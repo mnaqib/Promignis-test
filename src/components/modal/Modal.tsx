@@ -126,7 +126,7 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
       </div>
       {showModal ? (
         <>
-          <div className="justify-center items-center flex fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="justify-center items-center flex fixed inset-0 z-50 bg-black bg-opacity-[.65] backdrop-blur-[2px] outline-none focus:outline-none">
             {/*content*/}
             {addImageModal ? (
               <div

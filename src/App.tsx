@@ -8,6 +8,11 @@ import Navbar from './components/Navbar'
 import { addAll, Image, selectImages } from './features/images/imageSlice'
 import { sortByTitle } from './utils/sortBy'
 
+export interface Id {
+  id: string
+  checked: boolean
+}
+
 function App() {
   const dispatch = useAppDispatch()
   const [isdeleteEnabled, setIsdeleteEnabled] = useState(false)
@@ -16,6 +21,25 @@ function App() {
   const data = useAppSelector(selectImages)
   const [search, setSearch] = useState('')
   const [sortBy, setSortBy] = useState('title')
+  const [ids, setIds] = useState<Id[]>(
+    data.map((item) => {
+      return {
+        id: item.id,
+        checked: false,
+      }
+    })
+  )
+
+  useEffect(() => {
+    setIds(
+      data.map((item) => {
+        return {
+          id: item.id,
+          checked: false,
+        }
+      })
+    )
+  }, [data])
 
   useEffect(() => {
     ;(async function () {
@@ -41,18 +65,12 @@ function App() {
     listToDelete.length > 0
       ? setIsdeleteEnabled(true)
       : setIsdeleteEnabled(false)
-    if (data.length > 0 && listToDelete.length === data.length) {
+    if (listToDelete.length === data.length) {
       setCheckAll(true)
+    } else {
+      setCheckAll(false)
     }
   }, [listToDelete])
-
-  useEffect(() => {
-    checkAll
-      ? data.forEach((img) => {
-          listToDelete.push(img.id)
-        })
-      : setListToDelete([])
-  }, [checkAll])
 
   return (
     <div className="mx-6 font-SFProText">
@@ -67,13 +85,18 @@ function App() {
         search={search}
         setSearch={setSearch}
         setSortBy={setSortBy}
+        ids={ids}
+        setIds={setIds}
       />
       {data.length > 0 ? (
         <ImageList
           setListToDelete={setListToDelete}
           listToDelete={listToDelete}
-          checkAll={checkAll}
+          setCheckAll={setCheckAll}
           search={search}
+          checkAll={checkAll}
+          ids={ids}
+          setIds={setIds}
         />
       ) : (
         <div className="flex mt-[15%] justify-center items-center text-xl font-bold text-grayCustom/50">
