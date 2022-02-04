@@ -27,7 +27,11 @@ const ImageList: React.FC<IProps> = ({
   const [imageList, setImageList] = useState<Image[]>(images)
 
   useEffect(() => {
-    setImageList(images.filter((img) => img.title.includes(search)))
+    setImageList(
+      images.filter((img) =>
+        img.title.toLowerCase().includes(search.toLowerCase())
+      )
+    )
   }, [search, images])
 
   return (
