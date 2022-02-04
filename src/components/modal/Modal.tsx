@@ -117,7 +117,7 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
     <>
       <div>
         <button
-          className="bg-gradient-to-b from-[#0099FF] to-[#0B79C3] text-white active:bg-blue-600 font-medium text-sm px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+          className="bg-gradient-to-b from-[#0099FF] to-[#0B79C3] hover:opacity-80 text-white active:bg-blue-600 font-medium text-sm px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
           type="button"
           onClick={() => setShowModal(true)}
         >
@@ -267,10 +267,16 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
                     </div>
                   </div>
                   {/*footer*/}
-                  <div className="flex items-center justify-end p-6">
+                  <div
+                    className={
+                      images.length > 0
+                        ? 'flex items-center justify-end p-6'
+                        : 'hidden'
+                    }
+                  >
                     <button
                       disabled={selectedImage ? false : true}
-                      className="bg-gradient-to-b from-[#0099FF] to-[#0B79C3] text-white active:bg-blue-600 text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
+                      className="bg-gradient-to-b from-[#0099FF] to-[#0B79C3] disabled:opacity-50 text-white active:bg-blue-600 text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mb-1 ease-linear transition-all duration-150"
                       type="button"
                       onClick={() => {
                         setAddImageModal(true)

@@ -33,13 +33,10 @@ export const imageSlice = createSlice({
         state.value = state.value.filter((img) => img.id !== value)
       })
     },
-    removeAll: (state) => {
-      state.value = []
-    },
   },
 })
 
-export const { addImage, removeImage, removeAll, addAll } = imageSlice.actions
+export const { addImage, removeImage, addAll } = imageSlice.actions
 
 export const selectImages = (state: RootState) => state.images.value
 

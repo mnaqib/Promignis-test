@@ -31,7 +31,7 @@ const Filter: React.FC<IProps> = ({
   const dispatch = useAppDispatch()
 
   return (
-    <div className="flex flex-col border-gray-200 border h-40 xs:h-28 mt-3 mb-8 rounded-md">
+    <div className="flex flex-col border-gray-200 border h-40 xs:h-28 mt-3 mb-8 rounded-md bg-white">
       <div className="flex basis-full flex-col xs:flex-row border-gray-200 border-b h-16">
         <div className="flex xs:basis-[25%] sm:basis-[20%] lg:basis-[15%] mt-2 ml-4 xs:ml-0 xs: mt:0 xs:justify-center items-center border-gray-200 xs:border-r">
           <div>
