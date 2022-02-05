@@ -46,6 +46,7 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
     } else {
       setDisableSearch(true)
     }
+    setLoading(false)
   }, [search])
 
   useEffect(() => {

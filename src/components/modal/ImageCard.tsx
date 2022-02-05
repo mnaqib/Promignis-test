@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 interface IProps {
   id: string
-  description?: String
   url: string
   setSelectedImage: React.Dispatch<React.SetStateAction<string>>
   selectedImage: string
@@ -10,7 +9,6 @@ interface IProps {
 }
 
 const ImageCard: React.FC<IProps> = ({
-  description,
   url,
   id,
   selectedImage,

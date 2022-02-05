@@ -37,7 +37,6 @@ const ImageList: React.FC<IProps> = ({
         <ImageCard
           key={image.id}
           url={image.url}
-          description={image.description}
           id={image.id}
           setSelectedImage={setSelectedImage}
           selectedImage={selectedImage}
