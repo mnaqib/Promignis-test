@@ -6,6 +6,7 @@ interface IProps {
   url: string
   setSelectedImage: React.Dispatch<React.SetStateAction<string>>
   selectedImage: string
+  imageLoaded: () => void
 }
 
 const ImageCard: React.FC<IProps> = ({
@@ -14,6 +15,7 @@ const ImageCard: React.FC<IProps> = ({
   id,
   selectedImage,
   setSelectedImage,
+  imageLoaded,
 }) => {
   const [clicked, setClicked] = useState(false)
 
@@ -39,6 +41,7 @@ const ImageCard: React.FC<IProps> = ({
             ? 'object-cover basis-36 mx-1 my-1 h-24  rounded opacity-70 ring-4 ring-blue-600'
             : 'object-cover basis-36 mx-1 my-1 h-24  rounded'
         }
+        onLoad={imageLoaded}
       />
     </div>
   )

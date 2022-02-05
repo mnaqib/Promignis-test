@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useAppSelector } from '../../app/hooks'
 import {
@@ -32,10 +32,21 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
   const [sort, setSort] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [disableSearch, setDisableSearch] = useState(true)
+  const counter = useRef(0)
   const dispatch = useDispatch()
 
   const imageSet = useAppSelector(selectImages)
   const length = imageSet.length
+
+  useEffect(() => {
+    if (search.length > 0) {
+      setDisableSearch(false)
+    } else {
+      setDisableSearch(true)
+    }
+  }, [search])
 
   useEffect(() => {
     if (selectedImage) {
@@ -49,7 +60,6 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
 
   useEffect(() => {
     if (sort) {
-      console.log('ran')
       if (sortBy === 'title') {
         dispatch(addAll(sortByTitle(imageSet)))
       } else if (sortBy === 'date') {
@@ -61,10 +71,11 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
   }, [sort])
 
   const searchImage = async () => {
+    setLoading(true)
     const { results: response } = await fetch(
       `https://api.unsplash.com/search/photos?client_id=-7u_QQ4JL8yujr4-xaQDCq3l7VL812xDzGElyerQ4w8&query=${search}`
     ).then((res) => res.json())
-    let data: IState[] = response.map((result: any, index: number) => {
+    let data: IState[] = response.map((result: any) => {
       return {
         id: result.id,
         description: result.description ? result.description.split(' ')[0] : '',
@@ -76,6 +87,7 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
       }
     })
     setImages(data)
+    setDisableSearch(true)
   }
 
   function unShowModal() {
@@ -132,9 +144,9 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
               <div
                 className={
                   success
-                    ? 'flex basis-auto flex-col border-4 border-green-300 rounded-lg mx-1'
+                    ? 'flex basis-auto flex-col border-4 border-green-300 rounded-xl mx-1'
                     : error.length > 0
-                    ? 'flex basis-auto flex-col border-4 border-red-300 rounded-lg mx-1'
+                    ? 'flex basis-auto flex-col border-4 border-red-300 rounded-xl mx-1'
                     : 'flex basis-auto flex-col mx-1'
                 }
               >
@@ -203,7 +215,13 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
                 </div>
               </div>
             ) : (
-              <div className="flex basis-auto mx-1">
+              <div
+                className={
+                  loading
+                    ? 'flex basis-auto mx-1 ring-2 rounded-lg ring-blue-300'
+                    : 'flex basis-auto mx-1'
+                }
+              >
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                   {/*header*/}
                   <div className="flex items-start justify-between m-5">
@@ -217,6 +235,7 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
                       <div className="flex">
                         <Search search={search} setSearch={setSearch} />
                         <button
+                          disabled={disableSearch}
                           onClick={searchImage}
                           type="button"
                           className="inline-block mx-3 px-2 py-1 bg-gradient-to-b from-[#F1F5FA] to-[#FDFEFF] text-grayCustom/75 font-semibold text-xs leading-tight rounded shadow hover:shadow-lg transition duration-150 ease-in-out"
@@ -262,6 +281,9 @@ const Modal: React.FC<IProps> = ({ sortBy }) => {
                           images={images}
                           selectedImage={selectedImage}
                           setSelectedImage={setSelectedImage}
+                          loading={loading}
+                          setLoading={setLoading}
+                          counter={counter}
                         />
                       </div>
                     </div>
